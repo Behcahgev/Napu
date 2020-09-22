@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} Page de test date {% endblock %}</title>
+</head>
+<body>
+  <h1>Hello world</h1>
+
+  <p>Il est actuellement: {{date}} </p>
+
+  {% if nombre1 > 3 %}
+  <p> le premier nombre est supérieur à 3 </p>
+
+  {% elif nombre1 == 3 %}
+
+  <p> Le premier nombre est égal à 3 </p>
+
+  {% else %}
+
+  <p> Le premier nombre est inférieur à 3 </p>
+
+  {% endif %}
+
+  Les couleurs de l'arc-en-ciel sont :
+
+  <ul>
+  {% for code, nom in couleurs.items %}
+      <li style="color: #{{ code }}">{{ nom }}</li>
+  {% empty %}
+      <p> pas de couleurs dans l'arc en ciel</p>
+  {% endfor %}
+  </ul>
+
+  <a href="{% url "mon_equipe" nombre1 %}">
+    Lien vers ma super equipe N° {{ nombre1 }}
+  </a>
+
+  {% comment %}
+    super commentaire
+    sur
+    plusieures lignes
+  {% endcomment%}
+
+  {% load static %}
+<img src="{% static 'paris/images/index.jpeg' %}" alt="Mon image" />
+
+</body>
+
+</html>

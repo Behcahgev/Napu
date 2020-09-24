@@ -50,9 +50,8 @@ class Team_player(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # La liaison OneToOne vers le modèle User
-    avatar = models.ImageField(null=True, blank=True, upload_to="avatars/")
+    avatar = models.ImageField(null=True, blank=True, default='paris/static/paris/images/avatars/default.png', upload_to="paris/static/paris/images/avatars/")
     signature = models.TextField(blank=True)
-
 
 
     def __str__(self):

@@ -22,4 +22,5 @@ urlpatterns = [
     path('dateActuelle',views.date_actuelle, name='date'),
     path('login', views.connexion, name='login'),
     path('deconnexion', views.deconnexion, name='deconnexion'),
+    path('',views.hub, name='hub'),
 ]

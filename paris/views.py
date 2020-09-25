@@ -4,8 +4,8 @@ from django.shortcuts import redirect
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm
-from .models import Profile
+from .forms import LoginForm, CreateRoomForm
+from .models import Profile, BetRoom
 # Create your views here.
 
 #EXAMPLES
@@ -74,7 +74,30 @@ def deconnexion(request):
 @login_required
 def hub(request):
 
+    #Get user rooms
+    betRooms = BetRoom.objects.filter(creator = request.user).order_by('created_at').reverse()
+
     return render(request,'paris/home.html',locals())
 
+@login_required
+def create_room(request):
 
-    
+    if request.method == "POST":
+        form = CreateRoomForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            public = form.cleaned_data["public"]
+
+            betRoom = BetRoom()
+            betRoom.name = name
+            betRoom.public = public
+            betRoom.creator = request.user
+
+            betRoom.save()
+
+            return redirect(hub)
+
+    else:
+        form = CreateRoomForm()
+
+    return render(request,'paris/create_room.html',locals())

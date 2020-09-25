@@ -5,6 +5,26 @@
 
 {% block body %}
 
+<div class="container">
 
+
+    <div class="row">
+        <!-- user's rooms -->
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" style="padding:2%;">
+            <ul class="list-group">
+                {% for betRoom in betRooms %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ betRoom.name }}
+                        <span class="badge badge-primary badge-pill">{{ betRoom.created_at | date:'d/m/Y' }}</span>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        You have not created any room yet. 
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

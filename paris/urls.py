@@ -22,5 +22,6 @@ urlpatterns = [
     path('dateActuelle',views.date_actuelle, name='date'),
     path('login', views.connexion, name='login'),
     path('deconnexion', views.deconnexion, name='deconnexion'),
+    path('create_room', views.create_room, name='create_room'),
     path('',views.hub, name='hub'),
 ]

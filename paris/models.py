@@ -77,7 +77,7 @@ class BetRoom(models.Model):
 
 
     def __str__(self):
-        return "Bet Room n°{0}".format(self.id)
+        return self.creator.username+" - "+self.created_at.strftime('%Y-%m-%d %H:%M:%S') 
 
 
 class BetRoom_Profile(models.Model):

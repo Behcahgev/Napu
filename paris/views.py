@@ -5,7 +5,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, CreateRoomForm
-from .models import Profile, BetRoom
+from .models import Profile, BetRoom, BetRoom_Profile
 # Create your views here.
 
 #EXAMPLES
@@ -92,8 +92,14 @@ def create_room(request):
             betRoom.name = name
             betRoom.public = public
             betRoom.creator = request.user
-
             betRoom.save()
+            betRoom.users.add(request.user.profile)
+
+            #set creator as admin
+            betRoomProfile = BetRoom_Profile.objects.get(profile = request.user.profile, BetRoom = betRoom)
+            betRoomProfile.role = 'AD'
+
+            betRoomProfile.save()
 
             return redirect(hub)
 
